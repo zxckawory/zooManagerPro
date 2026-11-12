@@ -1,0 +1,122 @@
+﻿<ContentPage xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:u="https://irihi.tech/ursa"
+			 xmlns:viewmodels="using:zooManagerPro.ViewModels"
+			 xmlns:m="using:zooManagerPro.Models"
+			 xmlns:materialIcon="using:Material.Icons.Avalonia"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="zooManagerPro.HomeView"
+			 x:DataType="viewmodels:HomeViewModel"
+			 x:CompileBindings="False"
+			 Header="ZooManagerPro">
+	<u:OverlayDialogHost Name="DialogHost">
+		<Grid RowDefinitions="100,100,*" 
+			  Width="{Binding #DialogHost.Bounds.Width}"
+			  Height="{Binding #DialogHost.Bounds.Height}">
+			<Grid ColumnDefinitions="*,*,*,*" Margin="16,14,16,4">
+				<Border Classes="card">
+					<StackPanel>
+						<TextBlock Text="Зарегистрировано животных" Classes="cardTitle"/>
+						<TextBlock Text="{Binding AnimalsCount}" Foreground="#2980B9" Classes="cardValue"/>
+					</StackPanel>
+				</Border>
+
+				<Border Classes="card" Grid.Column="1">
+					<StackPanel>
+						<TextBlock Text="Количество видов" Classes="cardTitle"/>
+						<TextBlock Text="{Binding SpeciesCount}" Foreground="#27AE60" Classes="cardValue"/>
+					</StackPanel>
+				</Border>
+
+				<Border Classes="card" Grid.Column="2">
+					<StackPanel>
+						<TextBlock Text="Свободные вольеры" Classes="cardTitle"/>
+						<TextBlock Text="{Binding FreeEnclosure}" Foreground="#E67E22" Classes="cardValue"/>
+					</StackPanel>
+				</Border>
+
+				<Border Classes="card" Grid.Column="3">
+					<StackPanel>
+						<TextBlock Text="Осмотр у ветеринара (7 дней)" Classes="cardTitle"/>
+						<TextBlock Text="{Binding LastDateVeterinar}" Foreground="#E74C3C" Classes="cardValue"/>
+					</StackPanel>
+				</Border>
+			</Grid>
+
+			<Border Grid.Row="1" Classes="card" Margin="10">
+				<Grid ColumnDefinitions="*,*">
+					<StackPanel Orientation="Horizontal" Spacing="10" Height="45">
+						<StackPanel Orientation="Horizontal">
+							<materialIcon:MaterialIcon Kind="Magnify" Height="25"/>
+							<TextBox HorizontalAlignment="Center" PlaceholderText="поиск" Margin="10,0,0,0" Name="SearchTextBox" Text="{Binding SearchText}" MaxWidth="300" Width="300"/>
+						</StackPanel>
+
+						<ComboBox Name="SpeciesComboBox" ItemsSource="{Binding Species}" SelectedItem="{Binding SelectedSpecies}" SelectedIndex="0">
+							<ComboBox.ItemTemplate>
+								<DataTemplate DataType="m:Species">
+									<TextBlock Text="{Binding SpeciesName}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+
+						<ComboBox Name="HealthStatusComboBox" ItemsSource="{Binding HealthStatuses}" SelectedItem="{Binding SelectedHealthStatus}" SelectedIndex="0">
+							<ComboBox.ItemTemplate>
+								<DataTemplate DataType="m:HealthStatus">
+									<TextBlock Text="{Binding HealthStatusName}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+
+						<Button VerticalAlignment="Center" Content="Вольеры" Command="{Binding EnclosurePageCommand}"/>
+
+						<Button Content="Кормление" Command="{Binding AnimalFeedingPageCommand}"/>
+					</StackPanel>
+
+					<Button Grid.Column="1" Command="{Binding AddCommand}" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center" Height="40" Width="40">
+						<materialIcon:MaterialIcon Kind="Plus" Height="30" Width="30"/>
+					</Button>
+				</Grid>
+			</Border>
+
+			<ScrollViewer Grid.Row="2">
+				<Border Classes="card" Margin="10">
+					<ItemsControl ItemsSource="{Binding Animals}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate DataType="m:Animal">
+								<Border Classes="card" Margin="10">
+									<Grid ColumnDefinitions="*,*,*">
+										<Grid Width="200">
+											<ProgressBar IsIndeterminate="True"/>
+											<Image Source="{Binding PhotoBitmap}"/>
+										</Grid>
+
+										<StackPanel Grid.Column="1" Spacing="10">
+											<TextBlock Text="{Binding AnimalName, StringFormat='Кличка: {0}'}"/>
+											<TextBlock Text="{Binding Species.SpeciesName, StringFormat='Вид: {0}'}"/>
+											<TextBlock Text="{Binding DietaryRegimen.DietaryRegimenImage, StringFormat='Рацион питания: {0}'}"/>
+											<TextBlock Text="{Binding Gender.GenderName, StringFormat='Пол: {0}'}"/>
+											<TextBlock Text="{Binding Age, StringFormat='Возраст(указан в годах): {0}'}"/>
+											<TextBlock Text="{Binding Enclosure.TypeOfEnclosure.TypeOfEnclosureName, StringFormat='Тип вольера: {0}'}"/>
+											<TextBlock Text="{Binding HealthStatus.HealthStatusName, StringFormat='Статус здоровья: {0}'}" Foreground="{Binding HealthStatus.ColorHealthStatus}"/>
+										</StackPanel>
+
+										<StackPanel Grid.Column="2" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Right">
+											<Button Command="{Binding UpdateCommand}" CommandParameter="{Binding}" Height="40" Width="40">
+												<materialIcon:MaterialIcon Kind="PencilOutline" Height="30" Width="30"/>
+											</Button>
+											<Button Command="{Binding DeleteCommand}" CommandParameter="{Binding}" Height="40" Width="40">
+												<materialIcon:MaterialIcon Kind="DeleteOutline" Height="30" Width="30"/>
+											</Button>
+										</StackPanel>
+									</Grid>
+								</Border>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</Border>
+			</ScrollViewer>
+		</Grid>
+	</u:OverlayDialogHost>
+</ContentPage>

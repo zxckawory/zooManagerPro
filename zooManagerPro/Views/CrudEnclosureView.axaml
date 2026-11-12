@@ -1,0 +1,71 @@
+﻿<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:zooManagerPro.Models"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:viewmodels="using:zooManagerPro.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="zooManagerPro.Views.CrudEnclosureView"
+             x:DataType="viewmodels:CrudEnclosureViewModel">
+    <Grid ColumnDefinitions="*,*" RowDefinitions="*,100">
+        <StackPanel Spacing="10" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Вместимость:"/>
+                <TextBox Text="{Binding EnclosureMaxCapacity}"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Заполненность:"/>
+                <TextBox Text="{Binding EnclosureCapacity}"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Площадь:"/>
+                <TextBox Text="{Binding EnclosureSquare}"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Дата последнего тех. осмотра:"/>
+                <u:DateOnlyPicker HorizontalAlignment="Stretch" SelectedDate="{Binding SelectedDateOfTI}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Spacing="10" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Тип вольера:"/>
+                <ComboBox SelectedItem="{Binding SelectedTypeOfEnclosure}" ItemsSource="{Binding TypeOfEnclosures}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:TypeOfEnclosure">
+                            <TextBlock Text="{Binding TypeOfEnclosureName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Статус вольера:"/>
+                <ComboBox SelectedItem="{Binding SelectedStatusEnclosure}" ItemsSource="{Binding EnclosureStatuses}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:EnclosureStatus">
+                            <TextBlock Text="{Binding EnclosureStatusName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Климатическая зона:"/>
+                <ComboBox SelectedItem="{Binding SelectedClimateZone}" ItemsSource="{Binding ClimateZones}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:ClimateZone">
+                            <TextBlock Text="{Binding ClimateZoneName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="1" Content="Сохранить" Command="{Binding SaveEnclosureCommand}"/>
+    </Grid>
+</ContentPage>

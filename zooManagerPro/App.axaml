@@ -1,0 +1,157 @@
+﻿<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="zooManagerPro.App"
+             xmlns:m="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:semi="https://irihi.tech/semi"
+             xmlns:u="https://irihi.tech/ursa"
+             RequestedThemeVariant="Light">
+
+    <Application.Styles>
+        <semi:SemiTheme Locale="ru-RU"/>
+        <semi:UrsaSemiTheme Locale="ru-RU"/>
+        <m:MaterialIconStyles/>
+
+        <!-- ═══════════════ ФОН СТРАНИЦ ═══════════════ -->
+        <!-- Лёгкая зелёная дымка вместо чисто белого -->
+        <Style Selector="ContentPage">
+            <Setter Property="Background" Value="#F6FBF0"/>
+        </Style>
+
+        <!-- ═══════════════ ТИПОГРАФИКА ═══════════════ -->
+        <Style Selector="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="#2E3B23"/>
+        </Style>
+
+        <Style Selector="TextBlock.Label">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="#5F7A3F"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+
+        <!-- ═══════════════ НАВИГАЦИЯ / ЗАГОЛОВОК ОКНА ═══════════════ -->
+        <Style Selector="Border#PART_NavigationBar">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#2D6E00" Offset="0"/>
+                    <GradientStop Color="#41A602" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter>
+        </Style>
+
+        <Style Selector="ContentPresenter#PART_Header">
+            <Setter Property="Foreground" Value="#BEFC77"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style Selector="u|UrsaWindow /template/ u|TitleBar#PART_TitleBar">
+            <Setter Property="Margin" Value="32,0,0,0" />
+        </Style>
+
+        <!-- ═══════════════ ПОЛЯ ВВОДА ═══════════════ -->
+        <Style Selector="TextBox">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="#EFFAE0"/>
+            <Setter Property="BorderBrush" Value="#A3D977"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+
+        <Style Selector="TextBox:pointerover /template/ Border">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="#E2F7C4"/>
+            <Setter Property="BorderBrush" Value="#6FBE3A"/>
+        </Style>
+
+        <Style Selector="TextBox:focus /template/ Border">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="#D8F7A8"/>
+            <Setter Property="BorderBrush" Value="#368A01"/>
+        </Style>
+
+        <!-- ═══════════════ ВЫПАДАЮЩИЕ СПИСКИ ═══════════════ -->
+        <Style Selector="ComboBox">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="#EFFAE0"/>
+            <Setter Property="BorderBrush" Value="#A3D977"/>
+            <Setter Property="MinHeight" Value="44"/>
+        </Style>
+
+        <Style Selector="ComboBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#E2F7C4"/>
+            <Setter Property="BorderBrush" Value="#6FBE3A"/>
+        </Style>
+
+        <Style Selector="ComboBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#D8F7A8"/>
+            <Setter Property="BorderBrush" Value="#368A01"/>
+        </Style>
+
+        <!-- ═══════════════ КНОПКИ ═══════════════ -->
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#368A01"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderBrush" Value="#2C7001"/>
+        </Style>
+
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#41A602"/>
+            <Setter Property="BorderBrush" Value="#368A01"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#2D6E00"/>
+            <Setter Property="BorderBrush" Value="#245C00"/>
+            <Setter Property="Foreground" Value="#EFFAE0"/>
+        </Style>
+
+        <!-- ═══════════════ ПРОГРЕСС-БАР ═══════════════ -->
+        <Style Selector="ProgressBar">
+            <Setter Property="Foreground" Value="#368A01"/>
+        </Style>
+
+        <!-- ═══════════════ КАРТОЧКИ ═══════════════ -->
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="18,14"/>
+            <Setter Property="Margin" Value="6,0"/>
+            <Setter Property="BoxShadow" Value="0 2 14 0 #1E000000"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15"/>
+                    <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <!-- Лёгкая подсветка карточки при наведении -->
+        <Style Selector="Border.card:pointerover">
+            <Setter Property="Background" Value="#FAFEF3"/>
+            <Setter Property="BoxShadow" Value="0 4 18 0 #2B000000"/>
+        </Style>
+
+        <Style Selector="TextBlock.cardTitle">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#7D8F6B"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style Selector="TextBlock.cardValue">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#263A17"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
+
+    </Application.Styles>
+</Application>

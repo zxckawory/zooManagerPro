@@ -1,0 +1,56 @@
+﻿<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:zooManagerPro.ViewModels"
+             xmlns:materialIcon="using:Material.Icons.Avalonia"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:zooManagerPro.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="zooManagerPro.ViewModels.EnclosuresView"
+             x:DataType="local:EnclosuresViewModel"
+             Header="ZooManagerPro">
+    <u:OverlayDialogHost Name="DialogHost1">
+        <Grid RowDefinitions="100,*"
+              Width="{Binding #DialogHost1.Bounds.Width}"
+			  Height="{Binding #DialogHost1.Bounds.Height}">
+            <Button  Margin="10" HorizontalAlignment="Left" Command="{Binding AddCommand}">
+                <materialIcon:MaterialIcon Kind="Plus" Height="25"/>
+            </Button>
+
+            <ScrollViewer Grid.Row="1">
+                <ItemsControl ItemsSource="{Binding Enclosures}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="models:Enclosure">
+                            <Border Classes="card" Margin="10">
+                                <Grid ColumnDefinitions="*,*,*">
+                                    <StackPanel Spacing="10">
+                                        <TextBlock Text="{Binding Id, StringFormat='Номер вольера: {0}'}"/>
+                                        <TextBlock Text="{Binding TypeOfEnclosure.TypeOfEnclosureName, StringFormat='Тип вольера: {0}'}"/>
+                                        <TextBlock Text="{Binding MaxCapacity, StringFormat='Вместимость: {0}'}"/>
+                                        <TextBlock Text="{Binding Capacity, StringFormat='Заполненность: {0}'}"/>
+                                        <TextBlock Text="{Binding EnclosureStatus.EnclosureStatusName, StringFormat='Статус вольера: {0}'}"/>
+                                        <TextBlock Text="{Binding Square, StringFormat='Площадь вольера: {0}'}"/>
+                                        <TextBlock Text="{Binding ClimateZone.ClimateZoneName, StringFormat='Климатическая зона: {0}'}"/>
+                                    </StackPanel>
+
+                                    <Image Grid.Column="1" Height="100" Width="100" Source="{Binding Image}"/>    
+
+                                    <StackPanel Grid.Column="2" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button Command="{Binding UpdateEnclosureCommand}" CommandParameter="{Binding}">
+                                            <materialIcon:MaterialIcon Kind="PencilOutline" Height="25"/>
+                                        </Button>
+
+                                        <Button Command="{Binding DeleteEnclosureCommand}" CommandParameter="{Binding}">
+                                            <materialIcon:MaterialIcon Kind="DeleteOutline" Height="25"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </u:OverlayDialogHost>
+</ContentPage>

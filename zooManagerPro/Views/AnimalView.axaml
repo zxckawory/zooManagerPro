@@ -1,0 +1,105 @@
+﻿<ContentPage xmlns="https://github.com/avaloniaui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:models="using:zooManagerPro.Models"
+                xmlns:viewmodels="using:zooManagerPro.ViewModels"
+                xmlns:materialIcon="using:Material.Icons.Avalonia"
+                xmlns:u="https://irihi.tech/ursa"
+                mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                x:DataType="viewmodels:AnimalViewModel"
+                x:Class="zooManagerPro.Views.AnimalView"
+                Header="ZooManagerPro">
+    <Design.DataContext>
+        <viewmodels:AnimalViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="*,*" RowDefinitions="*,100">
+        <StackPanel Spacing="10" Margin="10">
+            <Image Source="{Binding Image}" Height="200" Width="200"/>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button HorizontalAlignment="Left" Command="{Binding AddPhotoCommand}">
+                    <materialIcon:MaterialIcon Kind="ImagePlusOutline" Height="25"/>
+                </Button>
+
+                <Button HorizontalAlignment="Right" Command="{Binding RemovePhotoCommand}">
+                    <materialIcon:MaterialIcon Kind="ImageMinusOutline" Height="25"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Кличка:"/>
+                <TextBox Text="{Binding AnimalName}"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Вид:"/>
+                <ComboBox SelectedItem="{Binding SelectedSpecies}" ItemsSource="{Binding Species}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:Species">
+                            <TextBlock Text="{Binding SpeciesName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Пол:"/>
+                <ComboBox SelectedItem="{Binding SelectedGender}" ItemsSource="{Binding Genders}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:Gender">
+                            <TextBlock Text="{Binding GenderName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Дата рождения:"/>
+                <u:DateOnlyPicker HorizontalAlignment="Stretch" SelectedDate="{Binding SelectedDateOfBirth}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Spacing="10" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Рацион питания:"/>
+                <ComboBox SelectedItem="{Binding SelectedDietaryRegiman}" ItemsSource="{Binding DietaryRegimans}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:DietaryRegiman">
+                            <TextBlock Text="{Binding DietName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Статус здоровья:"/>
+                <ComboBox SelectedItem="{Binding SelectedHealthStatus}" ItemsSource="{Binding HealthStatuses}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:HealthStatus">
+                            <TextBlock Text="{Binding HealthStatusName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Дата последнего осмотра:"/>
+                <u:DateOnlyPicker HorizontalAlignment="Stretch" SelectedDate="{Binding SelectedDateOfLastVeterinaryExamination}"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Вольер:"/>
+                <ComboBox SelectedItem="{Binding SelectedEnclosure}" ItemsSource="{Binding Enclosures}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:Enclosure">
+                            <TextBlock Text="{Binding EnclosureAndType}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="1" Content="Сохранить" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding SaveAnimalCommand}"/>
+    </Grid>
+</ContentPage>

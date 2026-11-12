@@ -1,0 +1,79 @@
+﻿<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:zooManagerPro.Models"
+             xmlns:viewmodels="using:zooManagerPro.ViewModels"
+             xmlns:materialIcon="using:Material.Icons.Avalonia"
+             xmlns:u="https://irihi.tech/ursa"
+             x:DataType="viewmodels:CrudAnimalFeedingViewModel"
+             Header="ZooManagerPro"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="zooManagerPro.Views.CrudAnimalFeedingView">
+    <Grid ColumnDefinitions="*,*" RowDefinitions="*,100">
+        <StackPanel Spacing="10" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Животное:"/>
+                <ComboBox ItemsSource="{Binding Animals}" SelectedItem="{Binding SelectedAnimal}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:Animal">
+                            <TextBlock Text="{Binding AnimalTypeEnclosure}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Дата кормления:"/>
+                <u:DateTimePicker SelectedDate="{Binding SelectedFeedingDateTime}"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Тип кормления:"/>
+                <ComboBox ItemsSource="{Binding TypeOfFeedings}" SelectedItem="{Binding SelectedTypeOfFeeding}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:TypeOfFeeding">
+                            <TextBlock Text="{Binding TypeOfFeedingName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Количество корма:"/>
+                <TextBox Text="{Binding FoodAmount}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Spacing="10" Margin="10" Grid.Column="1">
+             <StackPanel>
+                <TextBlock Text="Единица измерения:"/>
+                <ComboBox ItemsSource="{Binding UnitOfMasses}" SelectedItem="{Binding SelectedUnitOfMass}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:UnitOfMass">
+                            <TextBlock Text="{Binding UnitOfMassName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+             <StackPanel>
+                <TextBlock Text="Ответственный сотрудник:"/>
+                <ComboBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmploee}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:Employee">
+                            <TextBlock Text="{Binding Login}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Примечания:"/>
+                <TextBox Text="{Binding FeedingDes}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="1" Content="Сохранить" Command="{Binding SaveAnimalFeedingCommand}"/>
+    </Grid>
+</ContentPage>

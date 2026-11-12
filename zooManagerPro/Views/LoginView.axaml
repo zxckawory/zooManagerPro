@@ -1,0 +1,30 @@
+﻿<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="using:zooManagerPro.ViewModels"
+             xmlns:materialIcon="using:Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="zooManagerPro.LoginView"
+             x:DataType="viewmodels:LoginViewModel"
+             Header="Вход"
+             Foreground="#adff4f">
+   <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*">
+       <Border Grid.RowSpan="3" Background="#adff4f">
+		   <materialIcon:MaterialIcon Kind="LeafCircleOutline" Foreground="#368a01" Height="250"/>
+       </Border>
+
+	   <StackPanel Grid.Column="1" Grid.Row="1" Margin="10" Spacing="10">
+           <TextBlock Text="Добро пожаловать!" HorizontalAlignment="Center" FontWeight="Bold" FontSize="25" Foreground="#368a01"/>
+		   <StackPanel>
+			   <TextBlock Text="Login" Classes="Label"/>
+               <TextBox Name="LoginTextBox" PlaceholderText="ivan" Text="{Binding Login}"/>
+           </StackPanel>
+           <StackPanel>
+			   <TextBlock Text="Password" Classes="Label"/>
+               <TextBox Name="PasswordTextBox" PlaceholderText="1234" Text="{Binding Password}"/>
+           </StackPanel>
+           <Button Name="ButtonTextBox" Margin="5" HorizontalAlignment="Center" Content="Войти" Command="{Binding EntranceCommand}"/>
+       </StackPanel>
+   </Grid>
+</ContentPage>

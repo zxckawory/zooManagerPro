@@ -1,0 +1,54 @@
+﻿<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:zooManagerPro.Models"
+             xmlns:viewmodels="using:zooManagerPro.ViewModels"
+             xmlns:u="https://irihi.tech/ursa"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewmodels:AnimalFeedingViewModel"
+             x:Class="zooManagerPro.Views.AnimalFeedingView"
+			 Header="ZooManagerPro">
+    <Grid RowDefinitions="100,*">
+        <StackPanel Orientation="Horizontal" Spacing="10" Margin="10">
+            <ComboBox VerticalAlignment="Center" ItemsSource="{Binding Animals}" SelectedItem="{Binding SelectedAnimals}" SelectedIndex="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="models:Animal">
+                        <TextBlock Text="{Binding AnimalName}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ComboBox VerticalAlignment="Center" ItemsSource="{Binding TypeOfFeedings}" SelectedItem="{Binding SelectedFeeding}" SelectedIndex="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="models:TypeOfFeeding">
+                        <TextBlock Text="{Binding TypeOfFeedingName}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <u:DateOnlyPicker VerticalAlignment="Center" SelectedDate="{Binding SelectedDateOfFeeding}" Width="150"/>
+
+            <Button Content="Зарегистрировать кормление" Command="{Binding CrudAnimalFeedingPageCommand}"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding FeedingAnimals}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:AnimalsFeeding">
+                        <Border Classes="card" Margin="10">
+                            <StackPanel>
+                                <TextBlock Text="{Binding FeedingDateTime, StringFormat='Дата и время кормления: {0}'}"/>
+                                <TextBlock Text="{Binding Animal.AnimalName, StringFormat='Животное: {0}'}"/>
+                                <TextBlock Text="{Binding TypeOfFeeding.TypeOfFeedingName, StringFormat='Вид корма: {0}'}"/>
+                                <TextBlock Text="{Binding AmountAndUnit, StringFormat='Количество: {0}'}"/>
+                                <TextBlock Text="{Binding Employee.Login, StringFormat='Ответственный сотрудник: {0}'}"/>
+                                <TextBlock Text="{Binding FeedingDescription, StringFormat='Примечания: {0}'}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</ContentPage>
